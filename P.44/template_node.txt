@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>Watson VisualRecognition on Node-RED</title>
+    </head>
+    <body>
+        <h1>Node-RED Watson VisualRecognition Faces 認識結果</h1>
+        {{^result}}
+        <br/><font size="+2" color="red">No data</font>
+        {{/result}}
+        {{#result}}
+        {{#images}}
+        <h2>解析対象イメージ</h2> image: {{source_url}}<br/>
+        <img src="{{source_url}}" height='50%'/>
+        <table border='1'>
+            <thead><tr><th>名前</th><th>確信度</th><th>性別</th><th>年齢</th></tr></thead>
+            <tbody>
+                {{#faces}}
+                <tr>
+                    	<td><b>{{identity.name}}</b></td><td><i>{{identity.score}}</i></td>
+	<td><b>{{gender.gender}}</b></td><td><b>{{age.min}}-{{age.max}}</b></td>
+               </tr>
+               {{/faces}}
+            </tbody>
+        </table>
+        {{/images}}
+        {{/result}}
+        <hr/>
+        <form  action="{{req._parsedUrl.pathname}}">
+            <input type="submit" value="もう一度解析"/>
+        </form>
+    </body>
+</html>
+

@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <title>Watson VisualRecognition on Node-RED</title>
+    </head>
+    <body>
+        <h1>Node-RED Watson VisualRecognition Classify 認識結果</h1>
+        {{^result}}
+        <br/><font size="+2" color="red">No data</font>
+        {{/result}}
+        {{#result}}
+        {{#images}}
+        <h2>解析対象イメージ</h2> image: {{source_url}}<br/>
+        <img src="{{source_url}}" height='50%'/>
+        <table border='1'>
+            <thead><tr><th>分類</th><th>スコア(一致度)</th></tr></thead>
+            <tbody>
+                {{#classifiers}}
+                {{#classes}}
+                <tr>
+                    <td><b>{{class}}</b></td><td><i>{{score}}</i></td>
+               </tr>
+               {{/classes}}
+                {{/classifiers}}
+            </tbody>
+        </table>
+        {{/images}}
+        {{/result}}
+        <hr/>
+        <form  action="{{req._parsedUrl.pathname}}">
+            <input type="submit" value="もう一度解析"/>
+        </form>
+    </body>
+</html>
+
